@@ -14,9 +14,9 @@ def order(data : dict, num: int ):
         data['coins'] += num
         data['energy'] -= 30
         return f"You earned {num} coins."
-    else:
-        data['energy'] += 50
-        return "You had to rest!"
+    
+    data['energy'] += 50
+    return "You had to rest!"
 
 
 def ingredient(item: str, data: dict, num: int):
@@ -24,8 +24,8 @@ def ingredient(item: str, data: dict, num: int):
     if data['coins'] >= num:
         data['coins'] -= num
         return False, f"You bought {item}."
-    else:
-        return True, f"Closed! Cannot afford {item}."
+        
+    return True, f"Closed! Cannot afford {item}."
 
 
 working_day_events = input().split('|')
