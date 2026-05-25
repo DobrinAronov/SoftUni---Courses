@@ -13,6 +13,7 @@ def negative(lst: list, ) -> list:
 def positive(lst: list, ) -> list:
     return [x for x in lst if x >= 0]
 
+
 number_of_integers = int(input())
 all_integers = []
 
