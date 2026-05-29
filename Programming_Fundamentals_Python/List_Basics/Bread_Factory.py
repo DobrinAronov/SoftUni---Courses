@@ -12,7 +12,11 @@ def order(data: dict, num: int):
         data['coins'] += num
         data['energy'] -= 30
         return f"You earned {num} coins."
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> c3db364c054c97508e0d5ab4377e07d049d132bf
     data['energy'] += 50
     return "You had to rest!"
 
@@ -21,7 +25,11 @@ def ingredient(item: str, data: dict, num: int):
     if data['coins'] >= num:
         data['coins'] -= num
         return False, f"You bought {item}."
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> c3db364c054c97508e0d5ab4377e07d049d132bf
     return True, f"Closed! Cannot afford {item}."
 
 
