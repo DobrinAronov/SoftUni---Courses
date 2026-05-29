@@ -24,10 +24,10 @@ for num in range(number_of_integers):
 command = input()
 
 all_commands = {
-    'even' : even,
-    'odd' : odd,
-    'negative' : negative,
-    'positive' : positive
+    'even': even,
+    'odd': odd,
+    'negative': negative,
+    'positive': positive
 }
 
 print(all_commands[command](all_integers))

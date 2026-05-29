@@ -1,25 +1,28 @@
-fires_in_cells  = input().split('#')
+fires_in_cells = input().split('#')
 water = int(input())
 
 total_effort = 0.00
 extinguished_cells = []
 
+high = range(81, 125 + 1)
+medium = range(51, 80 + 1)
+low = range(1, 50 + 1)
+
 for fire in fires_in_cells:
     is_valid = False
     fire = fire.split(' = ')
-    fire_level = fire[0]
-    cell_value = int(fire[1])
+    fire_level, cell_value = fire[0], int(fire[1])
 
-    if  fire_level == 'High':
-        if  81 <= cell_value <= 125:
+    if fire_level == 'High':
+        if cell_value in high:
             is_valid = True
 
-    elif    fire_level == 'Medium':
-        if  51 <= cell_value <= 80:
+    elif fire_level == 'Medium':
+        if cell_value in medium:
             is_valid = True
 
-    elif    fire_level == 'Low':
-        if  1 <= cell_value <= 50:
+    elif fire_level == 'Low':
+        if cell_value in low:
             is_valid = True
 
     if is_valid:

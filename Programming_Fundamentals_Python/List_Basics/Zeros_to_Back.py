@@ -3,8 +3,8 @@ integer_numbers = []
 zero_list = []
 
 for idx in range(len(integers)):
-    if  integers[idx] == 0:
-       zero_list.append(0)
+    if integers[idx] == 0:
+        zero_list.append(0)
     else:
         integer_numbers.append(integers[idx])
 

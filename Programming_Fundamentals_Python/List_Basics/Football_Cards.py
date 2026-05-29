@@ -5,15 +5,15 @@ red_cards = input().split()
 game_terminated = False
 
 for card in red_cards:
-    if  card in team_a:
+    if card in team_a:
         team_a.remove(card)
-    elif    card in team_b:
+    elif card in team_b:
         team_b.remove(card)
 
-    if  len(team_a) < 7 or len(team_b) < 7:
+    if len(team_a) < 7 or len(team_b) < 7:
         game_terminated = True
         break
 
 print(f"Team A - {len(team_a)}; Team B - {len(team_b)}")
-if  game_terminated:
+if game_terminated:
     print("Game was terminated")

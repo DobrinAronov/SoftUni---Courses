@@ -20,5 +20,5 @@ while (current_command := input()) != 'No Money':
         gifts.pop()
         gifts.append(gift)
 
-result = [gift for gift in gifts if  gift is not None]
+result = [gift for gift in gifts if gift is not None]
 print(' '.join(result))

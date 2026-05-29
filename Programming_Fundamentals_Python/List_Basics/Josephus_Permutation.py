@@ -6,11 +6,11 @@ step = number - 1
 
 index = 0
 
-while   people_in_circle:
+while people_in_circle:
 
     index += step
 
-    while   index >= len(people_in_circle):
+    while index >= len(people_in_circle):
         index = index - len(people_in_circle)
 
     executed.append(people_in_circle[index])

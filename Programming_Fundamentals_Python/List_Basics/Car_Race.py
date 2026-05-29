@@ -9,15 +9,15 @@ total_left_racer_time = 0
 total_right_racer_time = 0
 
 for time in left_side_car_times:
-    if  time == 0:
-        if  total_left_racer_time > 0:
+    if time == 0:
+        if total_left_racer_time > 0:
             total_left_racer_time -= total_left_racer_time * 0.20
     total_left_racer_time += time
 
 for time in right_side_car_times[:: -1]:
-    if  time == 0:
-        if  total_right_racer_time > 0:
-         total_right_racer_time -= total_right_racer_time * 0.20
+    if time == 0:
+        if total_right_racer_time > 0:
+            total_right_racer_time -= total_right_racer_time * 0.20
     total_right_racer_time += time
 
 winner = ''
@@ -27,7 +27,7 @@ if total_left_racer_time < total_right_racer_time:
     winner = 'left'
     winner_time = total_left_racer_time
 
-elif    total_left_racer_time > total_right_racer_time:
+elif total_left_racer_time > total_right_racer_time:
     winner = 'right'
     winner_time = total_right_racer_time
 
