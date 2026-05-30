@@ -25,12 +25,12 @@ def ingredient(item: str, data: dict, num: int):
         return True, f"Closed! Cannot afford {item}."
 
 
-working_day_events = input().split('|')
-
 resources = {
     'coins': 100,
     'energy': 100
 }
+
+working_day_events = input().split('|')
 
 for event in working_day_events:
     have_break = False
