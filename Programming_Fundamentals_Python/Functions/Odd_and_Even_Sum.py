@@ -5,7 +5,7 @@ def odd_and_even_sum(some_number: str) -> str:
         digit = int(symbol)
         if digit % 2 == 0:
             even_sum += digit
-        elif digit % 2 != 0:
+        else:
             odd_sum += digit
     return f"Odd sum = {odd_sum}, Even sum = {even_sum}"
 

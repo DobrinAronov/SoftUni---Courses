@@ -1,17 +1,18 @@
-def sum_numbers(a: int, b: int) ->int:
-    return a + b
+def sum_numbers(num_1: int, num_2: int) ->int:
+    return num_1 + num_2
 
 
-def subtract(calculate_sum: int, c: int) -> int:
-    return calculate_sum - c
+def subtract(received_sum: int, num_3: int) -> int:
+    return received_sum - num_3
 
 
-number_1 = int(input())
-number_2 = int(input())
-number_3 = int(input())
+def add_and_subtract(number_1: int, number_2: int, number_3: int) -> int:
+    returned_result = sum_numbers(number_1, number_2)
+    return subtract(returned_result, number_3)
 
-def add_and_subtract():
-    sum_first_two_numbers = sum_numbers(number_1, number_2)
-    return subtract(sum_first_two_numbers, number_3)
 
-print(add_and_subtract())
+first_number = int(input())
+second_number = int(input())
+tird_number = int(input())
+
+print(add_and_subtract(first_number, second_number, tird_number))
