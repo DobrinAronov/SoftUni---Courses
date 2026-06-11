@@ -7,11 +7,11 @@ def number_classification(lst: list[int]) -> tuple:
     for number in lst:
         if number % 2 == 0:
             even.append(str(number))
-        if number % 2 != 0:
+        elif number % 2 != 0:
             odd.append(str(number))
         if number >= 0:
             positive.append(str(number))
-        if number < 0:
+        elif number < 0:
             negative.append(str(number))
     return positive, negative, even, odd
 

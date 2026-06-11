@@ -27,7 +27,6 @@ def divide(lst: list, idx: int, partition: int) -> list[str]:
                 output_list.append(lst[index])
             else:
                 word = lst[index]
-                #divide_string = ''
                 divide_length = len(lst[index]) // partition
                 # Divide word in equal partition
                 for i in range(partition):
@@ -52,6 +51,7 @@ all_commands = {
 list_of_data = input().split()
 
 while (current_command := input()) != "3:1":
+
     command, number_1, number_2 = current_command.split()
     number_1, number_2 = int(number_1), int(number_2)
 
