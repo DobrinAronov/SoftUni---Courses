@@ -11,7 +11,7 @@ def memory_game(lst: list, idx_1: int, idx_2: int, num_moves: int) -> tuple[bool
     elif lst[idx_1] != lst[idx_2]:
         return False, lst, num_moves, "Try again!"
 
-    # Case when we have equal indexes
+    # In case, we have the same elements
     first_remove_idx = max(idx_1, idx_2)
     second_remove_idx = min(idx_1, idx_2)
 
