@@ -7,7 +7,6 @@ def computer_receipt(total: float, price: float) -> tuple[float, str]:
 
 price_without_taxes = 0
 taxes = 0
-#is_special = False
 
 while (current_command := input()) not in ('special', 'regular'):
 

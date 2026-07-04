@@ -3,7 +3,7 @@ def dots(matrix: list[list], all_moves: list[tuple[int, int]]) -> int:
     columns = len(matrix[0])
 
     def checking_all_moves(row_: int, column_: int) -> int:
-        print(f"Влизам в {row_}, {column_}")
+        #print(f"Влизам в {row_}, {column_}")
         current_count_of_dots = 1
         matrix[row_][column_] = 'v'
 
@@ -13,7 +13,7 @@ def dots(matrix: list[list], all_moves: list[tuple[int, int]]) -> int:
 
             if is_coordinates_valid and matrix[i][j] == '.':
                 current_count_of_dots += checking_all_moves(i, j)
-        print(f"Излизам от {row_}, {column_}")
+        #print(f"Излизам от {row_}, {column_}")
         return current_count_of_dots
 
     max_count = 0
