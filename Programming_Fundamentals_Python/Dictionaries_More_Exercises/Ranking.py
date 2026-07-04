@@ -1,78 +1,49 @@
-def check_contest_is_valid(etalon_list: dict, some_name: str, contest_pass: str) -> bool:
-    if some_name in etalon_list.keys():
-        if contest_pass == etalon_list[some_name]:
+def is_correct_data(some_dict: dict, some_contest: str, some_password: str) -> bool:
+    for contest_name, check_password in some_dict.items():
+        if contest_name == some_contest and some_password == check_password:
             return True
     return False
 
 
-all_contests = {}
+def calculate_total_points(data: dict) -> tuple[str, int]:
+    winner = ''
+    total_points = 0
+
+    for student_name, points_in_course in data.items():
+        current_total = 0
+        for course, current_points in points_in_course.items():
+            current_total += current_points
+        if current_total > total_points:
+            total_points = current_total
+            winner = student_name
+    return winner, total_points
+
+
+contests_passwords = {}
 
 while (current_command := input()) != "end of contests":
     contest, password = current_command.split(':')
-    all_contests[contest] = password
+
+    contests_passwords[contest] = password
 
 students_submissions = {}
 
-while (contents_info := input()) != "end of submissions":
-    contest_name, contest_password, user_name, points = contents_info.split('=>')
+while (current_command := input()) != "end of submissions":
+    contest, password, user_name, points = current_command.split('=>')
     points = int(points)
 
-    correct_contents = check_contest_is_valid(all_contests, contest_name, contest_password)
-    if not correct_contents:
-        continue
-    else:
-        if contest_name not in students_submissions.keys():
-            students_submissions[contest_name] = {
-                'names': [],
-                'points': []
-            }
-        # We add new name and points (in lists) to the keys "name" and "points" if they do not exist!
-        if user_name not in students_submissions[contest_name]['names']:
-            students_submissions[contest_name]['names'].append(user_name)
-            students_submissions[contest_name]['points'].append(points)
-        else:  # We keep the student's highest grade.
-            index_name = students_submissions[contest_name]['names'].index(user_name)
-            if students_submissions[contest_name]['points'][index_name] < points:
-                students_submissions[contest_name]['points'][index_name] = points
+    if is_correct_data(contests_passwords, contest, password):
+        if user_name not in students_submissions:
+            students_submissions[user_name] = {}
+        if contest not in students_submissions[user_name]:
+            students_submissions[user_name][contest] = 0
+        students_submissions[user_name][contest] = max(students_submissions[user_name][contest], points)
 
-student_names = []
+best_student, total = calculate_total_points(students_submissions)
 
-for content in students_submissions:
-    for name in students_submissions[content]['names']:
-        if name not in student_names:
-            student_names.append(name)
-sorted_names = sorted(student_names)
-
-final_dict = {}
-
-for name in sorted_names:
-    for item in students_submissions:
-        if name in students_submissions[item]['names']:
-            if name not in final_dict:
-                final_dict[name] = {
-                    'subject': [],
-                    'points': []
-                }
-            index_name = students_submissions[item]['names'].index(name)
-            final_dict[name]['subject'].append(item)
-            final_dict[name]['points'].append(students_submissions[item]['points'][index_name])
-
-for item in final_dict:
-    pairs = sorted(zip(final_dict[item]['points'], final_dict[item]['subject']), reverse=True)
-    final_dict[item]['points'], final_dict[item]['subject'] = zip(*pairs)
-
-winner = ''
-winer_points = 0
-
-for item in final_dict:
-    total_points = sum(final_dict[item]['points'])
-    if total_points > winer_points:
-        winer_points = total_points
-        winner = item
-
-print(f"Best candidate is {winner} with total {winer_points} points.\nRanking:")
-
-for item in final_dict:
-    print(item)
-    for index in range(len(final_dict[item]['subject'])):
-        print(f"#  {final_dict[item]['subject'][index]} -> {final_dict[item]['points'][index]}")
+print(f"Best candidate is {best_student} with total {total} points.")
+print("Ranking:")
+for student, course_points in sorted(students_submissions.items(), key=lambda x: x[0]):
+    print(f"{student}")
+    for course_name, points in sorted(course_points.items(), key=lambda x: -x[1]):
+        print(f"#  {course_name} -> {points}")
