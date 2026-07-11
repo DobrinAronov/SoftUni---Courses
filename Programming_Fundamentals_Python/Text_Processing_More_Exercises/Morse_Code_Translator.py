@@ -3,37 +3,63 @@ import time
 import winsound
 
 
-def morse_code_translator(list_with_morse_codes: list, morse_alphabet: dict) -> str:
-    output_message = ''
-
-    for morse_letter in list_with_morse_codes:
+def morse_code_translator(morse_code: list, morse_alphabet: dict) -> str:
+    # Checking the morse code
+    for morse_letter in morse_code:
         for sign in morse_letter:
             if sign not in ('.', '-', '|', ' '):
                 return "Това не е морзов код !!!"
+
+    list_with_morse_codes = []
+    # Subtracting '|' as a separate symbol from morse_code!
+    for morse_letter in morse_code:
+        if '|' in morse_letter:
+            pipe_index = morse_letter.index('|')
+            list_with_morse_codes.append(morse_letter[:pipe_index])
+            list_with_morse_codes.append('|')
+            list_with_morse_codes.append(morse_letter[pipe_index + 1:])
+        else:
+            list_with_morse_codes.append(morse_letter)
+
+    output_message = ''
+    # Decoding the morse code
+    for morse_letter in list_with_morse_codes:
         if morse_letter == '|':
             output_message += ' '
         else:
             for letter, code in morse_alphabet.items():
                 if morse_letter == code:
                     output_message += letter
+                    break
     return output_message
 
 
 def message_morse_coding(text_for_coding: str, morse_alphabet: dict) -> str:
     output_morse_code = ''
 
-    for symbol in text_for_coding:
+    for idx in range(len(text_for_coding)):
+        symbol = text_for_coding[idx]
         if symbol == ' ':
-            output_morse_code += '| '
+            output_morse_code += '|'
         else:
-            if symbol.upper() in morse_alphabet:
-                output_morse_code += morse_alphabet[symbol.upper()] + ' '
+            if (idx + 1) < len(text_for_coding):
+                next_symbol = text_for_coding[idx + 1]
+                if next_symbol != ' ':
+                    if symbol.upper() in morse_alphabet:
+                        output_morse_code += morse_alphabet[symbol.upper()] + ' '
+                else:
+                    if symbol.upper() in morse_alphabet:
+                        output_morse_code += morse_alphabet[symbol.upper()]
+            elif idx == len(text_for_coding) - 1:
+                output_morse_code += morse_alphabet[symbol.upper()]
+
     return output_morse_code
 
 
 def sound(morse_code: str):
-    message_for_send = ''
     # Adding the "p" symbol between Morse code characters into one letter.
+    message_for_send = ''
+
     for idx in range(len(morse_code)):
         symbol = morse_code[idx]
         if (idx + 1) < len(morse_code):
@@ -42,25 +68,32 @@ def sound(morse_code: str):
                 message_for_send += symbol + 'p'
             else:
                 message_for_send += symbol
-
+        elif idx == len(morse_code) - 1:
+            message_for_send += symbol
+    # Sound message
+    # With the unit_time variable we can adjust the speed of message transmission!
+    unit_time = 100  # in mS !!!
+    pause_time = unit_time / 1000  # 1 unit_time in seconds !!!
     for symbol in message_for_send:
         if symbol == '.':
-            # point - frequency 600 Hz, duration 100 mS
-            winsound.Beep(600, 100)
+            # point - frequency 600 Hz, duration 1 unit_time
+            winsound.Beep(600, unit_time)
         elif symbol == '-':
-            # dash - frequency 600 Hz, duration 300 mS
-            winsound.Beep(600, 300)
-        # I replace the "p" symbol with a space
+            # dash - frequency 600 Hz, duration 3 unit_time
+            winsound.Beep(600, 3 * unit_time)
+
+        # I replace the "p" symbol with a pause,
         # to separate the Morse code characters into one letter.
+
         elif symbol == 'p':
-            # duration pause between symbols 100 mS
-            time.sleep(0.1)
+            # duration pause between characters 1 unit_time (in seconds)!
+            time.sleep(pause_time)
         elif symbol == ' ':
-            # duration pause between letters 300 mS
-            time.sleep(0.3)
+            # duration pause between letters 3 pause_time
+            time.sleep(3 * pause_time)
         elif symbol == '|':
-            # duration pause between words 700 mS
-            time.sleep(0.7)
+            # duration pause between words 7 pause_time
+            time.sleep(7 * pause_time)
 
 
 morse_code_alphabet = {'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.',
@@ -79,8 +112,8 @@ command = input("\nМоля, изберете действие:\n"
 while command != "end":
 
     if command == 'd':
-        morse_code_list = input("Моля, въведете морзов код: ").split()
-        text_message = morse_code_translator(morse_code_list, morse_code_alphabet)
+        morse_codes_message = input("Моля, въведете морзов код: ").split()
+        text_message = morse_code_translator(morse_codes_message, morse_code_alphabet)
         print(f"Декодирано съобщение:\n{text_message}")
 
     elif command == 'c':
@@ -101,3 +134,4 @@ while command != "end":
                     "'C' за кодиране на съобщение\n"
                     "'D' за декодиране на съобщение\n"
                     "За изход от програмата въведете End\n").lower()
+
