@@ -14,10 +14,13 @@ def morse_code_translator(morse_code: list, morse_alphabet: dict) -> str:
     # Subtracting '|' as a separate symbol from morse_code!
     for morse_letter in morse_code:
         if '|' in morse_letter:
-            pipe_index = morse_letter.index('|')
-            list_with_morse_codes.append(morse_letter[:pipe_index])
-            list_with_morse_codes.append('|')
-            list_with_morse_codes.append(morse_letter[pipe_index + 1:])
+            while '|' in morse_letter:
+                pipe_index = morse_letter.index('|')
+                list_with_morse_codes.append(morse_letter[:pipe_index])
+                list_with_morse_codes.append('|')
+                if not '|' in morse_letter[pipe_index + 1:]:
+                    list_with_morse_codes.append(morse_letter[pipe_index + 1:])
+                morse_letter = morse_letter[pipe_index + 1:]
         else:
             list_with_morse_codes.append(morse_letter)
 
