@@ -62,14 +62,14 @@ def sound(morse_code: str):
 
     for idx in range(len(morse_code)):
         symbol = morse_code[idx]
-        if (idx + 1) < len(morse_code):
-            next_symbol = morse_code[idx + 1]
-            if next_symbol != ' ' or next_symbol != '|':
-                message_for_send += symbol + 'p'
-            else:
-                message_for_send += symbol
-        elif idx == len(morse_code) - 1:
+        if idx == len(morse_code) - 1 or symbol == ' ' or symbol == '|':
             message_for_send += symbol
+        elif (idx + 1) < len(morse_code):
+            next_symbol = morse_code[idx + 1]
+            if next_symbol == ' ' or next_symbol == '|':
+                message_for_send += symbol
+            else:
+                message_for_send += symbol + 'p'
     # Sound message
     # With the unit_time variable we can adjust the speed of message transmission!
     unit_time = 100  # in mS !!!
