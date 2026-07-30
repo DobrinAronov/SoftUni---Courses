@@ -1,25 +1,18 @@
 import re
 
+pattern = r"@#+([A-Z][A-Za-z0-9]{4,}[A-Z])@#+"
 
-def check_valid_barcode(barcode: str) -> bool:
-    pattern = r"@#+[A-Z][A-Za-z0-9]{4,}[A-Z]@#+"
-    match = re.search(pattern, barcode)
-    if match:
-        return True
-    return False
+count_of_barcodes = int(input())
 
-
-number_of_barcodes = int(input())
-
-for number in range(number_of_barcodes):
-    current_string = input()
-    is_valid = check_valid_barcode(current_string)
-    if is_valid:
-        digits_pattern = r"\d"
-        match_digits = re.findall(digits_pattern, current_string)
-        if not match_digits:
-            print(f"Product group: 00")
-        else:
-            print(f"Product group: {''.join(match_digits)}")
+for num in range(count_of_barcodes):
+    current_barcode = input()
+    valid_barcode = re.search(pattern, current_barcode)
+    if valid_barcode:
+        for match in valid_barcode.groups():
+            number = re.findall(r"\d+", match)
+            if not number:
+                print(f"Product group: 00")
+            else:
+                print(f"Product group: {''.join(number)}")
     else:
         print("Invalid barcode")
