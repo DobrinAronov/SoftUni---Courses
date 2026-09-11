@@ -27,11 +27,3 @@ while True:
         else:
             print(first_station)
             break
-
-# 5
-# 3 6
-# 2 4
-# 5 6
-# 7 8
-# 14 7
-# 4
