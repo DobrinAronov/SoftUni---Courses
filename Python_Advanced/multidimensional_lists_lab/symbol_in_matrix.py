@@ -10,5 +10,4 @@ for row in range(n):
             print(f"({row}, {col})")
             exit()
 
-else:
-    print(f"{searching_symbol} does not occur in the matrix")
+print(f"{searching_symbol} does not occur in the matrix")
