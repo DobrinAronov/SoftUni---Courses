@@ -1,0 +1,1 @@
+print([[int(num) for num in input().split(', ') if int(num) % 2 ==0] for r in range(int(input()))])
