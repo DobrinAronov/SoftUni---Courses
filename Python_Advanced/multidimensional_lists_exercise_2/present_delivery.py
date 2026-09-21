@@ -24,36 +24,40 @@ directions = {
 }
 
 unhappy_nice_kids = nice_kids
+
 while (command := input()) != "Christmas morning":
     next_row = s_row + directions[command][0]
     next_col = s_col + directions[command][1]
 
-    if not (0 <= next_row < matrix_size and 0 <= s_col < matrix_size):
+    if not (0 <= next_row < matrix_size and 0 <= next_col < matrix_size):
         break
 
     s_row, s_col = next_row, next_col
+    cell = neighborhood[next_row][next_col]
 
-    if neighborhood[next_row][next_col] == "V":
+    if cell == "V":
         number_of_present -= 1
         unhappy_nice_kids -= 1
 
-    elif neighborhood[next_row][next_col] == "C":
+    elif cell == "C":
 
         for move in directions.keys():
-            next_row = s_row + directions[move][0]
-            next_col = s_col + directions[move][1]
+            neighbor_row = s_row + directions[move][0]
+            neighbor_col = s_col + directions[move][1]
 
-            if not (0 <= next_row < matrix_size and 0 <= s_col < matrix_size):
+            if not (0 <= neighbor_row < matrix_size and 0 <= neighbor_col < matrix_size):
                 continue
 
-            if neighborhood[next_row][next_col] == "V":
+            neighbor = neighborhood[neighbor_row][neighbor_col]
+
+            if neighbor == "V":
                 number_of_present -= 1
                 unhappy_nice_kids -= 1
 
-            elif neighborhood[next_row][next_col] == "X":
+            elif neighbor == "X":
                 number_of_present -= 1
 
-            neighborhood[next_row][next_col] = "-"
+            neighborhood[neighbor_row][neighbor_col] = "-"
 
             if number_of_present == 0:
                 break
