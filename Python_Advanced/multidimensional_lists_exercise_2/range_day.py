@@ -61,11 +61,10 @@ targets_shot = 0
 shot_targets = []
 
 for _ in range(int(input())):
-    current_command = input().split()
-    action, direction = current_command[0], current_command[1]
+    action, direction, *steps = input().split()
 
     if action == "move":
-        steps = int(current_command[2])
+        steps = int(steps[0])
         my_row, my_col = \
             move(shooting_range, direction, my_row, my_col, all_directions, steps)
 

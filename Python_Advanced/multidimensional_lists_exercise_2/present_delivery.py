@@ -23,7 +23,7 @@ directions = {
     "right": (0, 1)
 }
 
-unhappy_nice_kids = nice_kids
+nice_happy_kids = 0
 
 while (command := input()) != "Christmas morning":
     next_row = s_row + directions[command][0]
@@ -37,13 +37,13 @@ while (command := input()) != "Christmas morning":
 
     if cell == "V":
         number_of_present -= 1
-        unhappy_nice_kids -= 1
+        nice_happy_kids += 1
 
     elif cell == "C":
 
-        for move in directions.keys():
-            neighbor_row = s_row + directions[move][0]
-            neighbor_col = s_col + directions[move][1]
+        for move, (dr, dc) in directions.items():
+            neighbor_row = s_row + dr
+            neighbor_col = s_col + dc
 
             if not (0 <= neighbor_row < matrix_size and 0 <= neighbor_col < matrix_size):
                 continue
@@ -52,7 +52,7 @@ while (command := input()) != "Christmas morning":
 
             if neighbor == "V":
                 number_of_present -= 1
-                unhappy_nice_kids -= 1
+                nice_happy_kids += 1
 
             elif neighbor == "X":
                 number_of_present -= 1
@@ -67,14 +67,14 @@ while (command := input()) != "Christmas morning":
     if number_of_present == 0:
         break
 
-if number_of_present == 0 and unhappy_nice_kids > 0:
+if number_of_present == 0 and nice_happy_kids < nice_kids:
     print("Santa ran out of presents!")
 
 neighborhood[s_row][s_col] = "S"
 
 [print(*row) for row in neighborhood]
 
-if unhappy_nice_kids == 0:
-    print(f"Good job, Santa! {nice_kids} happy nice kid/s.")
+if nice_happy_kids == nice_kids:
+    print(f"Good job, Santa! {nice_happy_kids} happy nice kid/s.")
 else:
-    print(f"No presents for {unhappy_nice_kids} nice kid/s.")
+    print(f"No presents for {nice_kids - nice_happy_kids} nice kid/s.")

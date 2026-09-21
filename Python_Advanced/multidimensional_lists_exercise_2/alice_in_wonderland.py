@@ -12,7 +12,7 @@ for row in range(size):
             current_row[col] = "*"
     wonderland.append(current_row)
 
-directions = {
+DIRECTIONS = {
     "up": (-1, 0),
     "down": (1, 0),
     "left": (0, -1),
@@ -20,28 +20,26 @@ directions = {
 }
 
 tea_bags = 0
-while True:
-    command = input()
 
-    a_row += directions[command][0]
-    a_col += directions[command][1]
+while tea_bags < 10:
+    dr, dc = DIRECTIONS[input()]
+    a_row, a_col = a_row + dr, a_col + dc
 
     if not(0 <= a_row < size and 0 <= a_col < size):
-        print("Alice didn't make it to the tea party.")
         break
 
-    elif wonderland[a_row][a_col] == "R":
-        wonderland[a_row][a_col] = "*"
-        print("Alice didn't make it to the tea party.")
+    current_cell = wonderland[a_row][a_col]
+    wonderland[a_row][a_col] = "*"
+
+    if current_cell == "R":
         break
 
-    elif wonderland[a_row][a_col].isdigit():
-        tea_bags += int(wonderland[a_row][a_col])
-        wonderland[a_row][a_col] = "*"
-        if tea_bags >= 10:
-            print("She did it! She went to the party.")
-            break
-    else:
-        wonderland[a_row][a_col] = "*"
+    if current_cell.isdigit():
+        tea_bags += int(current_cell)
+
+if tea_bags >= 10:
+    print("She did it! She went to the party.")
+else:
+    print("Alice didn't make it to the tea party.")
 
 [print(*row) for row in wonderland]
