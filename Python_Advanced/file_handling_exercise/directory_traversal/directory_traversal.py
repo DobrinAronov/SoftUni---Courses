@@ -26,6 +26,6 @@ get_files(directory, 2)
 
 with open("report.txt", "w") as output:
     for ext, file_names in sorted(sorted_files.items()):
-        output.write(f".{ext}\n")
+        output.write(f"{ext}\n")
         for file_name in sorted(file_names):
             output.write(f"- - - {file_name}\n")

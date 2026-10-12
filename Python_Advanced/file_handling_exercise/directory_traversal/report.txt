@@ -1,19 +1,17 @@
-..html
+.html
 - - - index.html
-..js
+.js
 - - - index.js
-..pptx
+.pptx
 - - - demo.pptx
-..py
+.py
 - - - directory_traversal.py
 - - - even_lines.py
 - - - file_manipulator.py
 - - - line_numbers.py
 - - - program.py
 - - - python.py
-..rar
-- - - homework_file_handling.rar
-..txt
+.txt
 - - - log.txt
 - - - notes.txt
 - - - output.txt
