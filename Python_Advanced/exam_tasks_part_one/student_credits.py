@@ -1,7 +1,6 @@
 def students_credits(*courses_data: str) -> str:
     diploma_points = 240
-
-    diyan_courses = {}
+    student_courses = {}
 
     for curr_course in courses_data:
         course_info = curr_course.split('-')
@@ -9,18 +8,18 @@ def students_credits(*courses_data: str) -> str:
         course_credits, max_points, current_points = map(int, course_info[1:])
 
         current_credits = (current_points / max_points) * course_credits
-        diyan_courses[name] = current_credits
+        student_courses[name] = current_credits
 
     output = []
-    total_credits = sum(curr_credits for curr_credits in diyan_courses.values())
+    total_credits = sum(curr_credits for curr_credits in student_courses.values())
 
     if total_credits >= diploma_points:
         output.append(f"Diyan gets a diploma with {total_credits:.1f} credits.")
     else:
         output.append(f"Diyan needs {(diploma_points - total_credits):.1f} credits more for a diploma.")
 
-    for course, diyan_credits in sorted(diyan_courses.items(), key=lambda x: -x[1]):
-        output.append(f"{course} - {diyan_credits:.1f}")
+    for course, student_credits in sorted(student_courses.items(), key=lambda x: -x[1]):
+        output.append(f"{course} - {student_credits:.1f}")
 
     return '\n'.join(output)
 
