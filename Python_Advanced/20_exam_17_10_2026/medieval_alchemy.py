@@ -45,7 +45,7 @@ while substances_stack and crystal_energy_dqu:
                 crystal_energy_dqu.append(crystal)
             continue
 
-    if len(crafted_potions) == 5:
+    if len(crafted_potions) == len(potion):
         print("Success! The alchemist has forged all potions!")
         break
 
